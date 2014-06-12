@@ -1,0 +1,32 @@
+.title-input-field {
+  font-size: 28px;
+}
+
+.multipleTemplateInstance {
+  /* background-color: rgb(255, 255, 165); */
+  border: solid transparent 0px !important;
+}
+
+.multipleTemplateInstance {
+  background-color: rgb(255, 255, 165);
+  border-top: solid rgb(150, 114, 61) 2px !important;
+  border-left: solid rgb(150, 114, 61) 1px !important;
+}
+
+/* .multipleTemplateInstance:nth-child(even) {
+  background-color: rgb(255, 255, 165);
+}
+
+.multipleTemplateInstance:nth-child(even) {
+  background-color: rgb(255, 252, 213);
+} */
+
+
+/* textarea.emphasize:focus, input.emphasize:focus {
+  border: solid blue 2px;
+} */
+
+.focus-multipleTemplateInstance {
+/*   border: solid blue 2px !important; */
+  background-color: rgb(224, 182, 118) !important;
+}
