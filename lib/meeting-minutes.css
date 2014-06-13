@@ -63,6 +63,12 @@
 	width:140px;
 }
 
+.synopsis-wrapper {
+	background-color: #ccc;
+	margin: 5px 0 10px 0;
+	padding: 5px;
+	font-style: italic;
+}
 
 .multipleTemplateAdder {
 	color: #fff;
@@ -95,4 +101,14 @@
 	border-color: #285e8e; */
 	background-color: #2456B3;
 	border-color: #347BFF;
+}
+.mti-hide-on-blur {
+	display: none;
+}
+.mti-help-box {
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin: 10px 3px;
+	border: 1px solid #FFB50D;
+	background-color: #fcf8e3;
 }
