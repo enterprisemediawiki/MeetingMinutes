@@ -18,7 +18,7 @@ if (!defined('MEDIAWIKI')) {
 	die( "MeetingMinutes extension" );
 }
 
-$wgExtensionCredits['parserhook'][] = array(
+$GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 	'path'           => __FILE__,
 	'name'           => 'MeetingMinutes',
 	'url'            => 'http://github.com/enterprisemediawiki/MeetingMinutes',
@@ -57,7 +57,7 @@ $wgExtensionCredits['parserhook'][] = array(
 /**
  *  MeetingMinutes specific javascript and CSS modifications
  **/
-$wgHooks['AjaxAddScript'][] = 'addMeetingMinutesFiles';
+$GLOBALS['wgHooks']['AjaxAddScript'][] = 'addMeetingMinutesFiles';
 function addMeetingMinutesFiles ( $out ){
 	global $wgScriptPath;
 
