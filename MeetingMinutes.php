@@ -33,6 +33,7 @@ $GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/langua
 
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hooks.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR__ . '/includes/SynopsizeParserFunction.php';
 
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
