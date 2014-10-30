@@ -34,6 +34,7 @@ $GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/langua
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hooks.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR__ . '/includes/SynopsizeParserFunction.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeHookHandler'] = __DIR__ . '/includes/SynopsizeHookHandler.php';
 
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
@@ -62,32 +63,6 @@ $GLOBALS['wgResourceModules'] += array(
 
 
 
-// $GLOBALS['wgHooks']['ParserFirstCallInit'][] = function( Parser &$parser ) {
-
-	// $hookRegistrant = new \ParserHooks\HookRegistrant\HookRegistrant( $parser );
-
-	// $hookRegistrant->registerFunctionHandler(
-		// $extension->getCountHookDefinition(),
-		// $extension->getCountHookHandler()
-	// );
-
-	// $hookRegistrant->registerFunctionHandler(
-		// $extension->getListHookDefinition(),
-		// $extension->getListHookHandler()
-	// );
-
-	// $hookRegistrant->registerHookHandler(
-		// $extension->getCountHookDefinition(),
-		// $extension->getCountHookHandler()
-	// );
-
-	// $hookRegistrant->registerHookHandler(
-		// $extension->getListHookDefinition(),
-		// $extension->getListHookHandler()
-	// );
-
-	// return true;
-// };
 
 
 

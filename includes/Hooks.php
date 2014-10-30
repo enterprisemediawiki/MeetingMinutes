@@ -19,7 +19,7 @@ class Hooks {
 
 	static function setupParserFunctions ( &$parser ) {
 		
-		// set the {{#meetingminutes: ... }} parser function
+		set the {{#meetingminutes: ... }} parser function
 		$parser->setFunctionHook(
 			'meetingminutes',
 			array(
@@ -30,19 +30,58 @@ class Hooks {
 		);
 
 		// set the {{#synopsize: ... }} parser function
-		$parser->setFunctionHook(
-			'synopsize',
-			array(
-				'MeetingMinutes\SynopsizeParserFunction',
-				'renderParserFunction'
-			),
-			SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
-		);
+		// $parser->setFunctionHook(
+			// 'synopsize',
+			// array(
+				// 'MeetingMinutes\SynopsizeParserFunction',
+				// 'renderParserFunction'
+			// ),
+			// SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
+		// );
 
+		$hookRegistrant = new \ParserHooks\HookRegistrant\HookRegistrant( $parser );
+
+		$hookRegistrant->registerFunctionHandler(
+			new \ParserHooks\HookDefinition(
+				'synopsize',
+				array(
+					'synopsis' => array(
+						'default' => 'a synopsis'
+					)
+				),
+				'synopsis'
+			),
+			new SynopsizeHookHandler()
+		);
 		
 		return true;
 		
 	}
+	
+	
+// $GLOBALS['wgHooks']['ParserFirstCallInit'][] = function( Parser &$parser ) {
+
+
+
+	// $hookRegistrant->registerFunctionHandler(
+		// $extension->getListHookDefinition(),
+		// $extension->getListHookHandler()
+	// );
+
+	// $hookRegistrant->registerHookHandler(
+		// $extension->getCountHookDefinition(),
+		// $extension->getCountHookHandler()
+	// );
+
+	// $hookRegistrant->registerHookHandler(
+		// $extension->getListHookDefinition(),
+		// $extension->getListHookHandler()
+	// );
+
+	// return true;
+// };
+
+	
 	
 
 
