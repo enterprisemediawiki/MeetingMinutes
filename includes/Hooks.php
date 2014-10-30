@@ -15,8 +15,6 @@
 
 namespace MeetingMinutes;
 
-use 
-
 class Hooks {
 
 	static function setupParserFunctions ( &$parser ) {
@@ -109,7 +107,7 @@ class Hooks {
 	* @return bool true in all cases
 	*/
 	static function onBeforePageDisplay( $out, $skin ) {
-		$out->addModules( array( 'ext.meetingminutes.form' ) );
+		$out->addModules( array( 'ext.meetingminutes.base', 'ext.meetingminutes.form' ) );
 	}
 
 }

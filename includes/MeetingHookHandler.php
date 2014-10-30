@@ -17,6 +17,7 @@ namespace MeetingMinutes;
 use ParamProcessor\ProcessingResult;
 use Parser;
 use ParserHooks\HookHandler;
+use SMWQueryProcessor;
 
 class MeetingHookHandler implements HookHandler {
 
@@ -39,10 +40,69 @@ class MeetingHookHandler implements HookHandler {
 			// TODO:
 			return 'Invalid input. Cannot do something...';
 		}
-
-		return print_r( $result, true );
+				
+		$params = $result->getParameters();
 		
-		// return $parser->getTargetLanguage()->formatNum( $count );
+		$title         = $params['title']->getValue();
+		$day           = $params['day']->getValue();
+		$time          = $params['time']->getValue();
+		$building      = '[[' . $params['building']->getValue() . ']]';
+		$room          = $params['room']->getValue();
+		$phonenumber   = $params['phonenumber']->getValue();
+		$phonepassword = $params['phonepassword']->getValue();
+		$attendeesRaw  = explode( ',', $params['attendees']->getValue() );
+		$overview      = $params['overview']->getValue();
+		
+		$attendees = array();
+		foreach( $attendeesRaw as $attendee ) {
+			$attendee = trim( $attendee );
+			$attendees[] = "[[$attendee]]";
+		}
+		$attendees = implode( ', ', $attendees );
+	
+		// FIXME: this should be moved to a template (has MW decided on Handlebars?)
+		// FIXME: this obviously requires i18n
+		$html = 
+			"[[Category:Meeting]]".
+			"<table class='meeting-minutes-infobox'>".
+				"<caption>$title</caption>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Day</th><td>$day</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Time</th><td>$time</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Building</th><td>$building</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Room</th><td>$room</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Conference phone #</th><td>$phonenumber</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Conference password</th><td>$phonepassword</td></tr>".
+				"<tr><th class='meeting-minutes-infobox-row-label'>Significant attendees</th><td>$attendees</td></tr>".
+			"</table>".
+			"<p>$overview</p>".
+			
+			"<h2>Recent Meetings</h2>".
+			$something = SMWQueryProcessor::createQuery(
+				'[[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]]',
+				array(
+					'sort' => 'Meeting date',
+					'order' => 'desc',
+					'limit' => 10,
+					'default' => 'No metings of this type have been added',
+					'format' => 'table',
+				)
+			);
+			
+			return print_r( $something, true );
+			
+			
+			// "{{#ask: [[Category:Meeting Minutes]] [[Meeting type::{{PAGENAME}}]]".
+			// "| ?Meeting date = Date".
+			// "| ?Notes taken by".
+			// "| sort = Meeting date".
+			// "| order = desc".
+			// "| limit = 10".
+			// "| default = No meetings of this type have been added".
+			// "}}".
+
+			"<p>[[Special:FormEdit/Meeting Minutes|Add Meeting Minutes]]</p>";
+		
+		return $html;
 	}
 
 

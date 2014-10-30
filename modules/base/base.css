@@ -1,0 +1,21 @@
+.meeting-minutes-infobox {
+	width:            280px;
+	border:           solid #AAA 1px;
+	background-color: #f9f9f9;
+	color:            black;
+	float:            right;
+	clear:            right;
+	text-align:       left;
+	line-height:      1.5em;
+	font-size:        88%;
+	margin:           0.5em 0 0.5em 1em;
+}
+
+.meeting-minutes-infobox caption {
+	font-size: 125%;
+	font-weight: bold;
+}
+
+.meeting-minutes-infobox-row-label {
+	text-align: left;
+}

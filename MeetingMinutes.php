@@ -52,6 +52,10 @@ $ExtensionMeetingMinutesResourceTemplate = array(
 
 $GLOBALS['wgResourceModules'] += array(
 
+	'ext.meetingminutes.base' => $ExtensionMeetingMinutesResourceTemplate + array(
+		'styles' => 'base/base.css',
+	),
+
 	'ext.meetingminutes.form' => $ExtensionMeetingMinutesResourceTemplate + array(
 		'styles' => 'form/meeting-minutes.css',
 		'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
