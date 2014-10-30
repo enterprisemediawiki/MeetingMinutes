@@ -15,11 +15,13 @@
 
 namespace MeetingMinutes;
 
+use 
+
 class Hooks {
 
 	static function setupParserFunctions ( &$parser ) {
 		
-		set the {{#meetingminutes: ... }} parser function
+		// set the {{#meetingminutes: ... }} parser function
 		$parser->setFunctionHook(
 			'meetingminutes',
 			array(
@@ -39,20 +41,34 @@ class Hooks {
 			// SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
 		// );
 
-		$hookRegistrant = new \ParserHooks\HookRegistrant\HookRegistrant( $parser );
+		$hookRegistrant = new \ParserHooks\HookRegistrant( $parser );
 
 		$hookRegistrant->registerFunctionHandler(
 			new \ParserHooks\HookDefinition(
 				'synopsize',
 				array(
 					'synopsis' => array(
-						'default' => 'a synopsis'
+						'default' => 'a synopsis',
+						'message' => 'synopsize-parameter-synopsis'
+					),
+					'second' => array(
+						'default' => 'second',
+						'message' => 'synopsize-parameter-second'
 					)
 				),
 				'synopsis'
 			),
 			new SynopsizeHookHandler()
 		);
+		
+		
+		$extension = new \MeetingMinutes\Extension( \MeetingMinutes\Settings::newFromGlobals( $GLOBALS ) );
+
+		$hookRegistrant->registerFunctionHandler(
+			$extension->getMeetingHookDefinition(),
+			new MeetingHookHandler()
+		);
+
 		
 		return true;
 		

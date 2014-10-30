@@ -1,4 +1,6 @@
 {
 	"meetingminutes-desc": "Provides a simple method to enter meeting minutes into MediaWiki using Semantic Forms and embed minutes into related pages"
-	"synopsize": "Synopsize"
+	"synopsize": "Synopsize",
+	"synopsize-parameter-synopsis": "This is the synopsis and stuff. FIXME.",
+	"synopsize-parameter-second": "FIXME"
 }

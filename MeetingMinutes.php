@@ -31,10 +31,15 @@ $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 $GLOBALS['wgMessagesDirs']['Files'] = __DIR__ . '/i18n';
 $GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/language/Magic.php';
 
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Setup'] = __DIR__ . '/includes/Setup.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Extension'] = __DIR__ . '/includes/Extension.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Settings'] = __DIR__ . '/includes/Settings.php';
+
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hooks.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR__ . '/includes/SynopsizeParserFunction.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeHookHandler'] = __DIR__ . '/includes/SynopsizeHookHandler.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingHookHandler'] = __DIR__ . '/includes/MeetingHookHandler.php';
 
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';

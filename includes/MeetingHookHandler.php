@@ -18,7 +18,7 @@ use ParamProcessor\ProcessingResult;
 use Parser;
 use ParserHooks\HookHandler;
 
-class SynopsizeHookHandler implements HookHandler {
+class MeetingHookHandler implements HookHandler {
 
 	public function __construct(  ) {
 
