@@ -28,7 +28,7 @@ class MinutesParserFunction {
 		else
 			$altText = "";
 		
-		return "File = $file, Alt = $altText";
+		return "First = $file, Second = $altText";
 		
 	}
 	/*
