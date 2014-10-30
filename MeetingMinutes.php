@@ -24,8 +24,73 @@ $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 	'url'            => 'http://github.com/enterprisemediawiki/MeetingMinutes',
 	'author'         => 'James Montalvo',
 	'descriptionmsg' => 'meetingminutes-desc',
-	'version'        => '0.1.0'
+	'version'        => '0.2.0'
 );
+
+
+$GLOBALS['wgMessagesDirs']['Files'] = __DIR__ . '/i18n';
+$GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/language/Magic.php';
+
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hooks.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
+
+$GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
+$GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
+
+
+$ExtensionMeetingMinutesResourceTemplate = array(
+	'localBasePath' => __DIR__ . '/modules',
+	'remoteExtPath' => 'MeetingMinutes/modules',
+);
+
+$GLOBALS['wgResourceModules'] += array(
+
+	'ext.meetingminutes.form' => $ExtensionMeetingMinutesResourceTemplate + array(
+		'styles' => 'form/meeting-minutes.css',
+		'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
+		// 'dependencies' => array( 'mediawiki.Uri' ),
+	),
+
+);
+
+
+
+
+
+
+
+
+
+// $GLOBALS['wgHooks']['ParserFirstCallInit'][] = function( Parser &$parser ) {
+
+	// $hookRegistrant = new \ParserHooks\HookRegistrant\HookRegistrant( $parser );
+
+	// $hookRegistrant->registerFunctionHandler(
+		// $extension->getCountHookDefinition(),
+		// $extension->getCountHookHandler()
+	// );
+
+	// $hookRegistrant->registerFunctionHandler(
+		// $extension->getListHookDefinition(),
+		// $extension->getListHookHandler()
+	// );
+
+	// $hookRegistrant->registerHookHandler(
+		// $extension->getCountHookDefinition(),
+		// $extension->getCountHookHandler()
+	// );
+
+	// $hookRegistrant->registerHookHandler(
+		// $extension->getListHookDefinition(),
+		// $extension->getListHookHandler()
+	// );
+
+	// return true;
+// };
+
+
+
+
 
 # $dir: the directory of this file, e.g. something like:
 #	1)	/var/www/wiki/extensions/BlankParserFunction
@@ -54,22 +119,25 @@ $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 
 
 
+
+
+
 /**
  *  MeetingMinutes specific javascript and CSS modifications
  **/
-$GLOBALS['wgHooks']['AjaxAddScript'][] = 'addMeetingMinutesFiles';
-function addMeetingMinutesFiles ( $out ){
-	global $wgScriptPath;
+// $GLOBALS['wgHooks']['AjaxAddScript'][] = 'addMeetingMinutesFiles';
+// function addMeetingMinutesFiles ( $out ){
+	// global $wgScriptPath;
 
-	$out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/SF_MultipleInstanceRefire.js' );
-	$out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/meeting-minutes.js' );
+	// $out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/SF_MultipleInstanceRefire.js' );
+	// $out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/meeting-minutes.js' );
 
-	$out->addLink( array(
-		'rel' => 'stylesheet',
-		'type' => 'text/css',
-		'media' => "screen",
-		'href' => "$wgScriptPath/extensions/MeetingMinutes/lib/meeting-minutes.css"
-	) );
+	// $out->addLink( array(
+		// 'rel' => 'stylesheet',
+		// 'type' => 'text/css',
+		// 'media' => "screen",
+		// 'href' => "$wgScriptPath/extensions/MeetingMinutes/lib/meeting-minutes.css"
+	// ) );
 	
-	return true;
-}
+	// return true;
+// }
