@@ -21,7 +21,7 @@ class Hooks {
 		
 		// set the {{#meetingminutes: ... }} parser function
 		$parser->setFunctionHook(
-			'meetingminutes', // the name of parser function 
+			'meetingminutes',
 			array(
 				'MeetingMinutes\MinutesParserFunction',
 				'renderParserFunction'
@@ -29,6 +29,17 @@ class Hooks {
 			SFH_OBJECT_ARGS
 		);
 
+		// set the {{#synopsize: ... }} parser function
+		$parser->setFunctionHook(
+			'synopsize',
+			array(
+				'MeetingMinutes\SynopsizeParserFunction',
+				'renderParserFunction'
+			),
+			SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
+		);
+
+		
 		return true;
 		
 	}

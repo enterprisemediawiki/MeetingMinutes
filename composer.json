@@ -21,8 +21,7 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"mediawiki/parser-hooks": "~1.2",
-		"mediawiki/synopsize": "dev-master"
+		"mediawiki/parser-hooks": "~1.2"
 	},
 	"autoload": {
 		"files" : [
