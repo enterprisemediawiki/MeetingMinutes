@@ -67,6 +67,10 @@ class Hooks {
 			new MeetingHookHandler()
 		);
 
+		// $hookRegistrant->registerFunctionHandler(
+			// $extension->getMeetingMinutesHookDefinition(),
+			// new MeetingMinutesHookHandler()
+		// );
 		
 		return true;
 		

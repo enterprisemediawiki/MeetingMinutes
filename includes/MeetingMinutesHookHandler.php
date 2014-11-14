@@ -19,7 +19,7 @@ use Parser;
 use ParserHooks\HookHandler;
 use SMWQueryProcessor;
 
-class MeetingHookHandler implements HookHandler {
+class MeetingMinutesHookHandler implements HookHandler {
 
 	public function __construct(  ) {
 
@@ -46,17 +46,20 @@ class MeetingHookHandler implements HookHandler {
 		$meetingModel = array(
 			// FIXME: this obviously requires i18n for labels
 
-			'title'         => $params['title']->getValue(),
-			'day'           => $params['day']->getValue(),
-			'time'          => $params['time']->getValue(),
-			'building'      => '[[' . $params['building']->getValue() . ']]',
-			'room'          => $params['room']->getValue(),
-			'phonenumber'   => $params['phone number']->getValue(),
-			'phonepassword' => $params['phone password']->getValue(),
-			'overview'      => $params['overview']->getValue(),
+			
+			// FIXME:NEXT: put the correct params for minutes (below are for meeting)
+			
+			'title'         => $params['Title']->getValue(),
+			'day'           => $params['Day']->getValue(),
+			'time'          => $params['Time']->getValue(),
+			'building'      => '[[' . $params['Building']->getValue() . ']]',
+			'room'          => $params['Room']->getValue(),
+			'phonenumber'   => $params['Phone number']->getValue(),
+			'phonepassword' => $params['Phone password']->getValue(),
+			'overview'      => $params['Overview']->getValue(),
 		);
 
-		$attendeesRaw  = explode( ',', $params['attendees']->getValue() );
+		$attendeesRaw  = explode( ',', $params['Attendees']->getValue() );
 		$attendees = array();
 		foreach( $attendeesRaw as $attendee ) {
 			$attendee = trim( $attendee );
