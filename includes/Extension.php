@@ -239,7 +239,83 @@ class Extension {
 	public function getMeetingHookDefinition() {
 		$params = array();
 
-		$params['title'] = array(
+		$params['Title'] = array(
+			'default' => 'Meeting Title',
+		);
+
+		$params['Day'] = array(
+			'default' => 'Monday',
+			'values' => array( 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ),
+		);
+
+		$params['Time'] = array(
+			'default' => '08:00',
+		);
+
+		$params['Building'] = array(
+			'default' => '',
+		);
+
+		$params['Room'] = array(
+			'default' => '',
+		);
+
+		$params['Phone number'] = array(
+			'default' => '',
+		);
+
+		$params['Phone password'] = array(
+			'default' => '',
+		);
+
+		$params['Attendees'] = array(
+			'default' => '',
+		);
+
+		$params['Overview'] = array(
+			'default' => '',
+		);
+
+		// Give grep a chance to find the usages:
+		//  ext-mm-meeting-parameter-title ext-mm-meeting-parameter-day
+		//  ext-mm-meeting-parameter-time ext-mm-meeting-parameter-building
+		//  ext-mm-meeting-parameter-room ext-mm-meeting-parameter-phonenumber
+		//  ext-mm-meeting-parameter-phonepassword ext-mm-meeting-parameter-attendees
+		//  ext-mm-meeting-parameter-overview
+		foreach ( $params as $name => &$param ) {
+			$param['message'] = 'ext-mm-meeting-parameter-' . $name;
+		}
+
+		return new HookDefinition(
+			array( 'meeting' ),
+			$params,
+			array( 'title' )
+		);
+	}
+	
+
+	/*
+[[Category:Meeting Minutes]]
+<table class='meeting-minutes-infobox'>
+	<caption>Meeting Minutes</caption>
+	<tr><th class='meeting-minutes-infobox-row-label'>Meeting type</th><td>{{ day }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Meeting date</th><td>{{ time }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Start time</th><td>{{ building }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Notes taken by</th><td>{{ room }}</td></tr>
+	<tr><th colspan='2'>Meeting Documents</th></tr>
+	<tr><td colspan='2'>{{ meetingfiles }}</td></tr>
+</table>
+<div style="clear:both; margin-bottom: .5em; float: right; margin-left:2.5em; width: 350px;">__TOC__</div>
+
+{{{ topics }}}
+*/
+	/**
+	 * @return HookDefinition
+	 */
+	public function getMeetingMinutesHookDefinition() {
+		$params = array();
+
+		$params['meetingtype'] = array(
 			'default' => 'Meeting Title',
 		);
 
@@ -292,6 +368,7 @@ class Extension {
 			array( 'title' )
 		);
 	}
+	
 	
 	/**
 	 * @param Parser $parser

@@ -1,0 +1,9 @@
+{{=<% %>=}}
+{{#ask: [[Category:Meeting Minutes]] [[Meeting type::<% meetingtype %>]]
+| ?Meeting date = Date
+| ?Notes taken by
+| sort = Meeting date
+| order = desc
+| limit = 10
+| default = No meetings of this type have been added
+}}

@@ -28,10 +28,13 @@ class MinutesParserFunction {
 		// else
 			// $altText = "";
 		
-		// return "First = $file, Second = $altText";
-		$msg = new \RawMessage( "<a href='http://google.com'>google</a>" );
-		return $msg->parse();
+		// // return "First = $file, Second = $altText";
+		// $msg = new \RawMessage( "<a href='http://google.com'>google</a>" );
+		// return $msg->parse();
 
+		return "__NOTOC__";
+		
+		
 	}
 	/*
 	static function formatHttpFile ( $file, $altText='' ) {

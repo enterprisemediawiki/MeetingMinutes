@@ -42,58 +42,38 @@ class MeetingHookHandler implements HookHandler {
 		}
 				
 		$params = $result->getParameters();
-		
-		$title         = $params['title']->getValue();
-		$day           = $params['day']->getValue();
-		$time          = $params['time']->getValue();
-		$building      = '[[' . $params['building']->getValue() . ']]';
-		$room          = $params['room']->getValue();
-		$phonenumber   = $params['phonenumber']->getValue();
-		$phonepassword = $params['phonepassword']->getValue();
-		$attendeesRaw  = explode( ',', $params['attendees']->getValue() );
-		$overview      = $params['overview']->getValue();
-		
+
+		$meetingModel = array(
+			// FIXME: this obviously requires i18n for labels
+
+			'title'         => $params['Title']->getValue(),
+			'day'           => $params['Day']->getValue(),
+			'time'          => $params['Time']->getValue(),
+			'building'      => '[[' . $params['Building']->getValue() . ']]',
+			'room'          => $params['Room']->getValue(),
+			'phonenumber'   => $params['Phone number']->getValue(),
+			'phonepassword' => $params['Phone password']->getValue(),
+			'overview'      => $params['Overview']->getValue(),
+		);
+
+		$attendeesRaw  = explode( ',', $params['Attendees']->getValue() );
 		$attendees = array();
 		foreach( $attendeesRaw as $attendee ) {
 			$attendee = trim( $attendee );
 			$attendees[] = "[[$attendee]]";
 		}
-		$attendees = implode( ', ', $attendees );
+		$meetingModel[ 'attendees' ] = implode( ', ', $attendees );
 	
-		// FIXME: this should be moved to a template (has MW decided on Handlebars?)
-		// FIXME: maybe instead there should be an Infobox object to handle all infoboxes
-		// FIXME: this obviously requires i18n
-		$infobox = 
-			"[[Category:Meeting]]".
-			"<table class='meeting-minutes-infobox'>".
-				"<caption>$title</caption>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Day</th><td>$day</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Time</th><td>$time</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Building</th><td>$building</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Room</th><td>$room</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Conference phone #</th><td>$phonenumber</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Conference password</th><td>$phonepassword</td></tr>".
-				"<tr><th class='meeting-minutes-infobox-row-label'>Significant attendees</th><td>$attendees</td></tr>".
-			"</table>".
-			"<p>$overview</p>".
-			
-			"<h2>Recent Meetings</h2>";
 		
+		// FIXME: maybe there should be a special Infobox class/template to
+		// handle all infoboxes
+		$meetingView = new View ( 'meeting.mustache' );
+		$minutesForMeeting = new AskView ( 'minutesbymeeting.mustache' );
+
+		$meetingModel[ 'minutesaskquery' ] = $minutesForMeeting->render( array( 'meetingtype' => 'EVA Tools Panel' ) );
 		
-		$ask =
-"{{#ask: [[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]]
-| ?Meeting date = Date
-| ?Notes taken by
-| sort = Meeting date
-| order = desc
-| limit = 10
-| default = No meetings of this type have been added
-}}";
-		$ask = new \RawMessage( $ask );
-		
-		$html = $infobox . $ask->escaped() . "<p>[[Special:FormEdit/Meeting Minutes|Add Meeting Minutes]]</p>";
-		
-		return $html;
+		return $meetingView->render( $meetingModel );
+
 	}
 
 

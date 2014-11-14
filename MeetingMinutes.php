@@ -41,6 +41,11 @@ $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR_
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeHookHandler'] = __DIR__ . '/includes/SynopsizeHookHandler.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingHookHandler'] = __DIR__ . '/includes/MeetingHookHandler.php';
 
+// View and AskView
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\View'] = __DIR__ . '/includes/View.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\AskView'] = __DIR__ . '/includes/AskView.php';
+
+
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
 
