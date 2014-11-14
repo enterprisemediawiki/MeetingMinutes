@@ -19,17 +19,19 @@ class MinutesParserFunction {
 
 	static function renderParserFunction ( &$parser, $frame, $args ) {
 		
-		// first argument
-		$file = trim( $frame->expand($args[0]) );
+		// // first argument
+		// $file = trim( $frame->expand($args[0]) );
 
-		// check for second argument
-		if ( count($args) > 1 )
-			$altText = trim( $frame->expand($args[1]) );
-		else
-			$altText = "";
+		// // check for second argument
+		// if ( count($args) > 1 )
+			// $altText = trim( $frame->expand($args[1]) );
+		// else
+			// $altText = "";
 		
-		return "First = $file, Second = $altText";
-		
+		// return "First = $file, Second = $altText";
+		$msg = new \RawMessage( "<a href='http://google.com'>google</a>" );
+		return $msg->parse();
+
 	}
 	/*
 	static function formatHttpFile ( $file, $altText='' ) {

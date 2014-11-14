@@ -21,7 +21,8 @@
 	},
 	"require": {
 		"php": ">=5.3.0",
-		"mediawiki/parser-hooks": "~1.2"
+		"mediawiki/parser-hooks": "~1.2",
+		"mustache/mustache": "~2.7"
 	},
 	"autoload": {
 		"files" : [

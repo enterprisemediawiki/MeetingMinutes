@@ -1,6 +1,7 @@
 {
-	"meetingminutes-desc": "Provides a simple method to enter meeting minutes into MediaWiki using Semantic Forms and embed minutes into related pages"
+	"meetingminutes-desc": "Provides a simple method to enter meeting minutes into MediaWiki using Semantic Forms and embed minutes into related pages",
 	"synopsize": "Synopsize",
 	"synopsize-parameter-synopsis": "This is the synopsis and stuff. FIXME.",
-	"synopsize-parameter-second": "FIXME"
+	"synopsize-parameter-second": "FIXME",
+	"synopsize-test": "{{#ask: [[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]] | ?Meeting date = Date | ?Notes taken by | sort = Meeting date | order = desc | limit = 10 | default = No meetings of this type have been added }}"
 }

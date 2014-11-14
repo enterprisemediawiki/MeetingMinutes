@@ -28,7 +28,7 @@ $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 );
 
 
-$GLOBALS['wgMessagesDirs']['Files'] = __DIR__ . '/i18n';
+$GLOBALS['wgMessagesDirs']['MeetingMinutes'] = __DIR__ . '/i18n';
 $GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/language/Magic.php';
 
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\Setup'] = __DIR__ . '/includes/Setup.php';

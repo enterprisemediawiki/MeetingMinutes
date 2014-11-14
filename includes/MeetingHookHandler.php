@@ -61,8 +61,9 @@ class MeetingHookHandler implements HookHandler {
 		$attendees = implode( ', ', $attendees );
 	
 		// FIXME: this should be moved to a template (has MW decided on Handlebars?)
+		// FIXME: maybe instead there should be an Infobox object to handle all infoboxes
 		// FIXME: this obviously requires i18n
-		$html = 
+		$infobox = 
 			"[[Category:Meeting]]".
 			"<table class='meeting-minutes-infobox'>".
 				"<caption>$title</caption>".
@@ -76,31 +77,21 @@ class MeetingHookHandler implements HookHandler {
 			"</table>".
 			"<p>$overview</p>".
 			
-			"<h2>Recent Meetings</h2>".
-			$something = SMWQueryProcessor::createQuery(
-				'[[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]]',
-				array(
-					'sort' => 'Meeting date',
-					'order' => 'desc',
-					'limit' => 10,
-					'default' => 'No metings of this type have been added',
-					'format' => 'table',
-				)
-			);
-			
-			return print_r( $something, true );
-			
-			
-			// "{{#ask: [[Category:Meeting Minutes]] [[Meeting type::{{PAGENAME}}]]".
-			// "| ?Meeting date = Date".
-			// "| ?Notes taken by".
-			// "| sort = Meeting date".
-			// "| order = desc".
-			// "| limit = 10".
-			// "| default = No meetings of this type have been added".
-			// "}}".
-
-			"<p>[[Special:FormEdit/Meeting Minutes|Add Meeting Minutes]]</p>";
+			"<h2>Recent Meetings</h2>";
+		
+		
+		$ask =
+"{{#ask: [[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]]
+| ?Meeting date = Date
+| ?Notes taken by
+| sort = Meeting date
+| order = desc
+| limit = 10
+| default = No meetings of this type have been added
+}}";
+		$ask = new \RawMessage( $ask );
+		
+		$html = $infobox . $ask->escaped() . "<p>[[Special:FormEdit/Meeting Minutes|Add Meeting Minutes]]</p>";
 		
 		return $html;
 	}
