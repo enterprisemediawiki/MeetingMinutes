@@ -40,7 +40,8 @@ class MeetingHookHandler implements HookHandler {
 			// TODO:
 			return 'Invalid input. Cannot do something...';
 		}
-				
+		
+		
 		$params = $result->getParameters();
 
 		$meetingModel = array(

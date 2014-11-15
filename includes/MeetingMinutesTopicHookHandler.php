@@ -19,7 +19,7 @@ use Parser;
 use ParserHooks\HookHandler;
 use SMWQueryProcessor;
 
-class MeetingMinutesHookHandler implements HookHandler {
+class MeetingMinutesTopicHookHandler implements HookHandler {
 
 	public function __construct(  ) {
 
@@ -40,20 +40,21 @@ class MeetingMinutesHookHandler implements HookHandler {
 			// TODO:
 			return 'Invalid input. Cannot do something...';
 		}
-				
-		$params = $result->getParameters();echo "handled MeetingMinutes: " . $params['meeting type']->getValue() . "<br />\n";
+		
+		global $wgOut; //FIXME: globals === bad, but I don't want this CSS added unless parser function called
+		$wgOut->addModules( 'ext.meetingminutes.minutes' );
+		
+		$params = $result->getParameters();echo "handled MeetingMinutes Topic<br />\n";
 
-		$meetingMinutesModel = array(
-			// FIXME: this obviously requires i18n for labels			
-			'meetingtype'        => $params['meeting type']->getValue(),
-			'date'               => $params['date']->getValue(),
-			'start time hour'    => $params['start time hour']->getValue(),
-			'start time minute'  => $params['start time minute']->getValue(),
-			'notes taken by'     => $params['notes taken by']->getValue(),
-			'topics'             => $params['topics']->getValue(),
+		$meetingTopicModel = array(
+			// FIXME: this obviously requires i18n for labels
+
+			'topictitle'      => $params['topic title']->getValue(),
+			'relatedarticles' => $params['related articles']->getValue(),
+			'topictext'       => $params['topic text']->getValue(),
 		);
 
-		// $attendeesRaw  = explode( ',', $params['Attendees']->getValue() );
+		// $attendeesRaw  = explode( ',', $params['attendees']->getValue() );
 		// $attendees = array();
 		// foreach( $attendeesRaw as $attendee ) {
 			// $attendee = trim( $attendee );
@@ -64,13 +65,12 @@ class MeetingMinutesHookHandler implements HookHandler {
 		
 		// FIXME: maybe there should be a special Infobox class/template to
 		// handle all infoboxes
-		$meetingMinutesView = new View ( 'minutes.mustache' );
-		
+		$meetingTopicView = new View ( 'minutes.topic.mustache' );
 		
 		// $minutesForMeeting = new AskView ( 'minutesbymeeting.mustache' );
 		// $meetingModel[ 'minutesaskquery' ] = $minutesForMeeting->render( array( 'meetingtype' => 'EVA Tools Panel' ) );
 		
-		return $meetingMinutesView->render( $meetingMinutesModel );
+		return $meetingTopicView->render( $meetingTopicModel );
 
 	}
 

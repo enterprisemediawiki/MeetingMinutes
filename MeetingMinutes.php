@@ -39,15 +39,21 @@ $GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hoo
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR__ . '/includes/SynopsizeParserFunction.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeHookHandler'] = __DIR__ . '/includes/SynopsizeHookHandler.php';
+
+// Hook Handler classes
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingHookHandler'] = __DIR__ . '/includes/MeetingHookHandler.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingMinutesHookHandler'] = __DIR__ . '/includes/MeetingMinutesHookHandler.php';
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingMinutesTopicHookHandler'] = __DIR__ . '/includes/MeetingMinutesTopicHookHandler.php';
 
 // View and AskView
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\View'] = __DIR__ . '/includes/View.php';
 $GLOBALS['wgAutoloadClasses']['MeetingMinutes\AskView'] = __DIR__ . '/includes/AskView.php';
 
-
+// Hooks
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
+$GLOBALS['wgHooks']['smwInitProperties'][] = 'MeetingMinutes\Hooks::onSmwInitProperties';
+// $GLOBALS['wgHooks']['smwInitDatatypes'][] = 'MeetingMinutes\Hooks::onSmwInitDatatypes';
 
 
 $ExtensionMeetingMinutesResourceTemplate = array(
@@ -64,6 +70,12 @@ $GLOBALS['wgResourceModules'] += array(
 	'ext.meetingminutes.form' => $ExtensionMeetingMinutesResourceTemplate + array(
 		'styles' => 'form/meeting-minutes.css',
 		'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
+		// 'dependencies' => array( 'mediawiki.Uri' ),
+	),
+
+	'ext.meetingminutes.minutes' => $ExtensionMeetingMinutesResourceTemplate + array(
+		'styles' => 'minutes/minutes.css',
+		// 'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
 		// 'dependencies' => array( 'mediawiki.Uri' ),
 	),
 

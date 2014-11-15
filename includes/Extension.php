@@ -307,7 +307,7 @@ class Extension {
 
 		$params['date'] = array(
 			'default' => '',
-			'type' => 'date',
+			// 'type' => 'date', //FIXME: is this really just type string? If so document why
 		);
 
 		$params['start time hour'] = array(
@@ -337,6 +337,40 @@ class Extension {
 			array( 'meetingminutes' ),
 			$params,
 			array( 'meeting type' )
+		);
+	}
+	
+
+	/**
+	 * @return HookDefinition
+	 */
+	public function getMeetingMinutesTopicHookDefinition() {
+		$params = array();
+
+		$params['topic title'] = array(
+			'default' => '',
+		);
+
+		$params['related articles'] = array(
+			'default' => '',
+			// 'type' => 'date', //FIXME: is this really just type string? If so document why
+		);
+
+		$params['topic text'] = array(
+			'default' => '',
+		);
+
+		// Give grep a chance to find the usages:
+		// FIXME: insert all of these...
+		//  ext-mm-meeting-parameter-title ext-mm-meeting-parameter-day
+		foreach ( $params as $name => &$param ) {
+			$param['message'] = 'ext-mm-meeting-minutes-parameter-' . $name;
+		}
+
+		return new HookDefinition(
+			array( 'meetingminutestopic' ),
+			$params,
+			array( 'topic title' )
 		);
 	}
 	
