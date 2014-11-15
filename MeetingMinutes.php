@@ -53,6 +53,7 @@ $GLOBALS['wgAutoloadClasses']['MeetingMinutes\AskView'] = __DIR__ . '/includes/A
 $GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
 $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
 $GLOBALS['wgHooks']['smwInitProperties'][] = 'MeetingMinutes\Hooks::onSmwInitProperties';
+$GLOBALS['wgHooks']['SMWStore::updateDataBefore'][] = 'MeetingMinutes\Hooks::onSMWStoreUpdateDataBefore';
 // $GLOBALS['wgHooks']['smwInitDatatypes'][] = 'MeetingMinutes\Hooks::onSmwInitDatatypes';
 
 

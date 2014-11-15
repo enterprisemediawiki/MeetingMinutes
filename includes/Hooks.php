@@ -157,6 +157,22 @@ class Hooks {
 	}
 
 	/**
+	* Actually updates SMW properties on the page.
+	* @return bool true in all cases
+	*/
+	public static function onSMWStoreUpdateDataBefore ( \SMW\Store $store, \SMW\SemanticData $semanticData ) {
+	
+		$propertyDI = new \SMW\DIProperty( '___MEETINGSTANDARDDAY' );
+		$dataItem = new \SMWDIString( "Fakeday" ); // e.g. new DINumber ( num val ); or DIWikiPage::newFromTitle( titleobject ); or ...
+		
+		$semanticData->addPropertyObjectValue( $propertyDI, $dataItem );
+		
+		return true;
+	}
+	
+	
+	
+	/**
 	* Handler for smwInitDatatypes hook.
 	* @return bool true in all cases
 	*/
