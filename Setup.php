@@ -152,7 +152,9 @@ class Setup {
 	* @return bool true in all cases
 	*/
 	static function renderMeetingMinutesFormParserFunction ( &$parser, $frame, $args ) {
-		$out->addModules( array( 'ext.meetingminutes.form' ) );
+		global $wgOut;
+		$wgOut->addModules( array( 'ext.meetingminutes.form' ) );
+		return '';
 	}
 	
 	/**
@@ -164,7 +166,9 @@ class Setup {
 	* @return bool true in all cases
 	*/
 	static function renderMeetingMinutesTemplateParserFunction ( &$parser, $frame, $args ) {
-		$out->addModules( array( 'ext.meetingminutes.template' ) );
+		global $wgOut;
+		$wgOut->addModules( array( 'ext.meetingminutes.template' ) );
+		return '';
 	}
 
 }

@@ -7,7 +7,13 @@ This extension provides Javascript and CSS helpers to enable a slick method of e
 Pages you must create or import
 -------------------------------
 
-* Template:TOC???
+
+(for main page)
+* Template:Meeting Minutes Block 
+* Template:Meeting Minutes Block info for table row
+* Template:Meeting Minutes Block info for table row highlighted
+
+
 * Template:Meeting
 * Template:Meeting minutes
 
