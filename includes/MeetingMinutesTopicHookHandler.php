@@ -44,7 +44,7 @@ class MeetingMinutesTopicHookHandler implements HookHandler {
 		global $wgOut; //FIXME: globals === bad, but I don't want this CSS added unless parser function called
 		$wgOut->addModules( 'ext.meetingminutes.minutes' );
 		
-		$params = $result->getParameters();echo "handled MeetingMinutes Topic<br />\n";
+		$params = $result->getParameters();
 
 		$meetingTopicModel = array(
 			// FIXME: this obviously requires i18n for labels

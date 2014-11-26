@@ -1,0 +1,24 @@
+[[Category:Meeting Minutes]]
+<div id="ext-meeting-minutes-toc-wrapper">
+<table class='meeting-minutes-infobox' style="width:100%;">
+	<caption>Meeting Minutes</caption>
+	<tr><th class='meeting-minutes-infobox-row-label'>Meeting type</th><td>{{ meetingtype }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Meeting date</th><td>{{ time }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Start time</th><td>{{ building }}</td></tr>
+	<tr><th class='meeting-minutes-infobox-row-label'>Notes taken by</th><td>{{ room }}</td></tr>
+	<tr><th colspan='2'>Meeting Documents</th></tr>
+	<tr><td colspan='2'>{{ meetingfiles }}</td></tr>
+</table>
+__TOC__</div>
+
+{{{ topics }}}
+
+{{=<% %>=}}
+{{#ask: [[Category:Meeting Minutes]] [[Meeting type::EVA Tools Panel]]
+| ?Meeting date = Date
+| ?Notes taken by
+| sort = Meeting date
+| order = desc
+| limit = 10
+| default = No meetings of this type have been added
+}}

@@ -40,8 +40,8 @@ class MeetingMinutesHookHandler implements HookHandler {
 			// TODO:
 			return 'Invalid input. Cannot do something...';
 		}
-				
-		$params = $result->getParameters();echo "handled MeetingMinutes: " . $params['meeting type']->getValue() . "<br />\n";
+		
+		$params = $result->getParameters();
 
 		$meetingMinutesModel = array(
 			// FIXME: this obviously requires i18n for labels			
@@ -65,13 +65,15 @@ class MeetingMinutesHookHandler implements HookHandler {
 		// FIXME: maybe there should be a special Infobox class/template to
 		// handle all infoboxes
 		$meetingMinutesView = new View ( 'minutes.mustache' );
-		
-		
-		// $minutesForMeeting = new AskView ( 'minutesbymeeting.mustache' );
-		// $meetingModel[ 'minutesaskquery' ] = $minutesForMeeting->render( array( 'meetingtype' => 'EVA Tools Panel' ) );
-		
-		return $meetingMinutesView->render( $meetingMinutesModel );
+				
+		#return $meetingMinutesView->render( $meetingMinutesModel );
+		$out = $meetingMinutesView->render( $meetingMinutesModel );
+		return $out;
+		// global $wgOut;
+		// $output = $wgOut->parse( $out );
 
+		// return array( $output, 'noparse' => true, 'isHTML' => true );
+		
 	}
 
 

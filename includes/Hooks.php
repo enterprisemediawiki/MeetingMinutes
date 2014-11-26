@@ -29,15 +29,38 @@ class Hooks {
 			// SFH_OBJECT_ARGS
 		// );
 
-		// set the {{#synopsize: ... }} parser function
-		// $parser->setFunctionHook(
-			// 'synopsize',
-			// array(
-				// 'MeetingMinutes\SynopsizeParserFunction',
-				// 'renderParserFunction'
-			// ),
-			// SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
-		// );
+		// set the {{#dummy: ... }} parser function
+		$parser->setFunctionHook(
+			'dummy',
+			function( $parser, $frame, $args ) {
+
+
+
+				$meetingMinutesModel = array(
+					// FIXME: this obviously requires i18n for labels			
+					'meetingtype'        => 'A meeting type',
+					'date'               => '2014-11-12',
+					'start time hour'    => '09',
+					'start time minute'  => '00',
+					'notes taken by'     => 'James',
+					'topics'             => '',
+				);
+
+				$meetingMinutesView = new View ( 'dummy.mustache' );
+						
+				#return $meetingMinutesView->render( $meetingMinutesModel );
+				$out = $meetingMinutesView->render( $meetingMinutesModel );
+				// return $out;
+				global $wgOut;
+				$output = $wgOut->parse( $out );
+
+				return array( $output, 'noparse' => true, 'isHTML' => true );
+				return array( $out, 'noparse' => false, 'isHTML' => true );
+
+
+			},
+			SFH_OBJECT_ARGS // defines the format of how data is passed to your function...don't worry about it for now.
+		);
 
 		$hookRegistrant = new \ParserHooks\HookRegistrant( $parser );
 
