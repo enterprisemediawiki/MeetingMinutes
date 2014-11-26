@@ -1,6 +1,7 @@
 <?php
 /** 
- * The MeetingMinutes extension provides JS and CSS to enable recording meeting minutes in SMW. See README.md.
+ * The MeetingMinutes extension provides JS and CSS to enable recording meeting
+ * minutes in SMW. See README.md.
  * 
  * Documentation: https://github.com/enterprisemediawiki/MeetingMinutes
  * Support:       https://github.com/enterprisemediawiki/MeetingMinutes
@@ -14,8 +15,8 @@
  */
 
 # Not a valid entry point, skip unless MEDIAWIKI is defined
-if (!defined('MEDIAWIKI')) {
-	die( "MeetingMinutes extension" );
+if ( ! defined( 'MEDIAWIKI' ) ) {
+	die( 'MeetingMinutes extension' );
 }
 
 $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
@@ -27,34 +28,15 @@ $GLOBALS['wgExtensionCredits']['parserhook'][] = array(
 	'version'        => '0.2.0'
 );
 
-
 $GLOBALS['wgMessagesDirs']['MeetingMinutes'] = __DIR__ . '/i18n';
-$GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/language/Magic.php';
+$GLOBALS['wgExtensionMessagesFiles']['MeetingMinutesMagic'] = __DIR__ . '/Magic.php';
 
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Setup'] = __DIR__ . '/includes/Setup.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Extension'] = __DIR__ . '/includes/Extension.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Settings'] = __DIR__ . '/includes/Settings.php';
+// Autoload setup class (location of parser function definitions)
+$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Setup'] = __DIR__ . '/Setup.php';
 
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\Hooks'] = __DIR__ . '/includes/Hooks.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MinutesParserFunction'] = __DIR__ . '/includes/MinutesParserFunction.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeParserFunction'] = __DIR__ . '/includes/SynopsizeParserFunction.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\SynopsizeHookHandler'] = __DIR__ . '/includes/SynopsizeHookHandler.php';
-
-// Hook Handler classes
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingHookHandler'] = __DIR__ . '/includes/MeetingHookHandler.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingMinutesHookHandler'] = __DIR__ . '/includes/MeetingMinutesHookHandler.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\MeetingMinutesTopicHookHandler'] = __DIR__ . '/includes/MeetingMinutesTopicHookHandler.php';
-
-// View and AskView
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\View'] = __DIR__ . '/includes/View.php';
-$GLOBALS['wgAutoloadClasses']['MeetingMinutes\AskView'] = __DIR__ . '/includes/AskView.php';
-
-// Hooks
-$GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Hooks::setupParserFunctions';
-$GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Hooks::onBeforePageDisplay';
-$GLOBALS['wgHooks']['smwInitProperties'][] = 'MeetingMinutes\Hooks::onSmwInitProperties';
-$GLOBALS['wgHooks']['SMWStore::updateDataBefore'][] = 'MeetingMinutes\Hooks::onSMWStoreUpdateDataBefore';
-// $GLOBALS['wgHooks']['smwInitDatatypes'][] = 'MeetingMinutes\Hooks::onSmwInitDatatypes';
+// Setup parser functions
+$GLOBALS['wgHooks']['ParserFirstCallInit'][] = 'MeetingMinutes\Setup::setupParserFunctions';
+// $GLOBALS['wgHooks']['BeforePageDisplay'][] = 'MeetingMinutes\Setup::onBeforePageDisplay';
 
 
 $ExtensionMeetingMinutesResourceTemplate = array(
@@ -64,83 +46,14 @@ $ExtensionMeetingMinutesResourceTemplate = array(
 
 $GLOBALS['wgResourceModules'] += array(
 
-	'ext.meetingminutes.base' => $ExtensionMeetingMinutesResourceTemplate + array(
-		'styles' => 'base/base.css',
-	),
-
 	'ext.meetingminutes.form' => $ExtensionMeetingMinutesResourceTemplate + array(
 		'styles' => 'form/meeting-minutes.css',
 		'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
 		// 'dependencies' => array( 'mediawiki.Uri' ),
 	),
 
-	'ext.meetingminutes.minutes' => $ExtensionMeetingMinutesResourceTemplate + array(
-		'styles' => 'minutes/minutes.css',
-		// 'scripts' => array( 'form/SF_MultipleInstanceRefire.js', 'form/meeting-minutes.js' ),
-		// 'dependencies' => array( 'mediawiki.Uri' ),
+	'ext.meetingminutes.template' => $ExtensionMeetingMinutesResourceTemplate + array(
+		'styles' => 'template/template.css',
 	),
 
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# $dir: the directory of this file, e.g. something like:
-#	1)	/var/www/wiki/extensions/BlankParserFunction
-# 	2)	C:/xampp/htdocs/wiki/extensions/BlankParserFunction
-// this isn't used, yet
-// $dir = dirname( __FILE__ ) . '/';
-
-# Location of "message file". Message files are used to store your extension's text
-#	that will be displayed to users. This text is generally stored in a separate
-#	file so it is easy to make text in English, German, Russian, etc, and users can
-#	easily switch to the desired language.
-// No internationalization yet
-// $wgExtensionMessagesFiles['BlankParserFunction'] = $dir . 'BlankParserFunction.i18n.php';
-
-# The "body" file will contain the bulk of a simple parser function extension. 
-#	NEED MORE INFO HERE.
-#
-// No classes yet
-// $wgAutoloadClasses['BlankParserFunction'] = $dir . 'BlankParserFunction.body.php';
-
-# This specifies the function that will initialize the parser function.
-#	NEED MORE INFO HERE.
-#
-// No parser function yet
-// $wgHooks['ParserFirstCallInit'][] = 'BlankParserFunction::setup';
-
-
-
-
-
-
-/**
- *  MeetingMinutes specific javascript and CSS modifications
- **/
-// $GLOBALS['wgHooks']['AjaxAddScript'][] = 'addMeetingMinutesFiles';
-// function addMeetingMinutesFiles ( $out ){
-	// global $wgScriptPath;
-
-	// $out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/SF_MultipleInstanceRefire.js' );
-	// $out->addScriptFile( $wgScriptPath .'/extensions/MeetingMinutes/lib/meeting-minutes.js' );
-
-	// $out->addLink( array(
-		// 'rel' => 'stylesheet',
-		// 'type' => 'text/css',
-		// 'media' => "screen",
-		// 'href' => "$wgScriptPath/extensions/MeetingMinutes/lib/meeting-minutes.css"
-	// ) );
-	
-	// return true;
-// }
